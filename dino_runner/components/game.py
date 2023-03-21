@@ -1,4 +1,3 @@
-
 import pygame 
 
 from dino_runner.utils.constants import BG, ICON, SCREEN_HEIGHT, SCREEN_WIDTH, TITLE, FPS, DEFAULT_TYPE 
@@ -93,7 +92,7 @@ class Game:
 
     def draw_power_up_time(self):
         if self.player.has_power_up:
-            time_to_show = round((self.player.power_up_time - pygame.time.get_ticks() / 1000, 2))
+            time_to_show = round((self.player.power_up_time - pygame.time.get_ticks()) / 1000, 2)
             if time_to_show >= 0:
                 draw_message_component(
                     f"{self.player.type.capitalize()} enable for {time_to_show} seconds",
@@ -124,7 +123,7 @@ class Game:
         else:
             draw_message_component("Press any key to restart", self.screen, pos_y_center=half_screen_height + 140)
             draw_message_component(
-                f"Your score: {self.score}",
+                f"Your score: {self.score}", self.screen,
                 pos_y_center=half_screen_height - 150
             )
             draw_message_component(
