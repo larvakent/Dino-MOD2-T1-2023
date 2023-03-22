@@ -16,10 +16,11 @@ class Game:
         self.playing = False
         self.running = False
         self.score = 0
+        self.time_to_blit = None
         self.death_count = 0
         self.game_speed = 20
         self.x_pos_bg = 0
-        self.y_pos_bg = 380
+        self.y_pos_bg = 0
         self.x_pos_bg_image = SCREEN_WIDTH
         self.y_pos_bg_image = SCREEN_HEIGHT - 210
         self.player = Dinosaur()
@@ -69,7 +70,6 @@ class Game:
     def draw(self):
         self.clock.tick(FPS)
         self.screen.fill((255,255,255))
-        self.screen.blit(BG_FUNDO_DIA, (0,0))
         self.draw_background()
         self.draw_bg_image()
         self.player.draw(self.screen)
@@ -80,20 +80,29 @@ class Game:
         pygame.display.update()
         pygame.display.flip()
     
+
     def draw_background(self):
-        image_width = BG.get_width()
-        self.screen.blit(BG, (self.x_pos_bg, self.y_pos_bg))
-        self.screen.blit(BG, (image_width + self.x_pos_bg, self.y_pos_bg)) 
+        image_width = BG_FUNDO_DIA.get_width()
+        self.screen.blit(BG_FUNDO_DIA, (self.x_pos_bg, self.y_pos_bg))
+        self.screen.blit(BG_FUNDO_DIA, (image_width + self.x_pos_bg, self.y_pos_bg)) 
         if self.x_pos_bg <= -image_width:
-            self.screen.blit(BG, (image_width + self.x_pos_bg, self.y_pos_bg))
+            self.screen.blit(BG_FUNDO_DIA, (image_width + self.x_pos_bg, self.y_pos_bg))
             self.x_pos_bg = 0
-        self.x_pos_bg -= self.game_speed
+        self.x_pos_bg -= 2
 
     def draw_bg_image(self):
-        if self.score >= 500 and self.score <= 1000:
-            self.screen.fill((0,0,0))
-            self.screen.blit(BG_FUNDO_NOITE, (0,0))
-            self.draw_background()
+        if self.score % 500 == 0:
+            self.time_to_blit = pygame.time.get_ticks() + 5000
+        if self.time_to_blit:
+            image_width = BG_FUNDO_NOITE.get_width()
+            self.screen.blit(BG_FUNDO_NOITE, (self.x_pos_bg, self.y_pos_bg))
+            self.screen.blit(BG_FUNDO_NOITE, (image_width + self.x_pos_bg, self.y_pos_bg)) 
+            if self.x_pos_bg <= -image_width:
+                self.screen.blit(BG_FUNDO_NOITE, (image_width + self.x_pos_bg, self.y_pos_bg))
+                self.x_pos_bg = 0
+            self.x_pos_bg -= 2
+            if pygame.time.get_ticks() >= self.time_to_blit:
+                self.time_to_blit = None
 
     def draw_score(self):
         draw_message_component(

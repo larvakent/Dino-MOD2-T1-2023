@@ -79,10 +79,10 @@ HAMMER = pygame.image.load(os.path.join(IMG_DIR, 'Other/hammer.png'))
 BG = pygame.image.load(os.path.join(IMG_DIR, 'Other/Track.png'))
 
 BG_FUNDO_NOITE = pygame.image.load(os.path.join(IMG_DIR, 'Other/cidade_fundo.jpg'))
-BG_FUNDO_NOITE = pygame.transform.scale(BG_FUNDO_NOITE, (SCREEN_WIDTH, SCREEN_HEIGHT-210))
+BG_FUNDO_NOITE = pygame.transform.scale(BG_FUNDO_NOITE, (SCREEN_WIDTH, SCREEN_HEIGHT))
 
 BG_FUNDO_DIA = pygame.image.load(os.path.join(IMG_DIR, 'Other/cidade_fundo_dia.jpg'))
-BG_FUNDO_DIA = pygame.transform.scale(BG_FUNDO_DIA, (SCREEN_WIDTH, SCREEN_HEIGHT-210))
+BG_FUNDO_DIA = pygame.transform.scale(BG_FUNDO_DIA, (SCREEN_WIDTH, SCREEN_HEIGHT))
 
 HEART = pygame.image.load(os.path.join(IMG_DIR, 'Other/SmallHeart.png'))
 
