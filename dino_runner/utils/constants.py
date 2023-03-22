@@ -13,6 +13,8 @@ IMG_DIR = os.path.join(os.path.dirname(__file__), "..", "assets")
 # Assets Constants
 ICON = pygame.image.load(os.path.join(IMG_DIR, "DinoWallpaper.png"))
 
+ICON_START = pygame.image.load(os.path.join(IMG_DIR, "Dino/DinoStart.png"))
+
 JUMP_SOUND = pygame.mixer.Sound(os.path.join(IMG_DIR, "Other/sons_jump_sound.wav"))
 JUMP_SOUND.set_volume(1)
 
