@@ -1,6 +1,6 @@
 import pygame 
 
-from dino_runner.utils.constants import BG, ICON, SCREEN_HEIGHT, SCREEN_WIDTH, TITLE, FPS, DEFAULT_TYPE 
+from dino_runner.utils.constants import BG, ICON, SCREEN_HEIGHT, SCREEN_WIDTH, TITLE, FPS, DEFAULT_TYPE, SCORE_SOUND, BG_FUNDO_NOITE, BG_FUNDO_DIA
 from dino_runner.components.dinosaur import Dinosaur 
 from dino_runner.components.obstacles.obstacle_manager import ObstacleManager 
 from dino_runner.utils.text_utils import draw_message_component 
@@ -20,6 +20,8 @@ class Game:
         self.game_speed = 20
         self.x_pos_bg = 0
         self.y_pos_bg = 380
+        self.x_pos_bg_image = SCREEN_WIDTH
+        self.y_pos_bg_image = SCREEN_HEIGHT - 210
         self.player = Dinosaur()
         self.obstacle_manager = ObstacleManager()
         self.power_up_manager = PowerUpManager()
@@ -42,6 +44,8 @@ class Game:
             self.events()
             self.update()
             self.draw()
+            if self.score % 100 == 0:
+                SCORE_SOUND.play()
 
     def events(self):
         for event in pygame.event.get():
@@ -61,10 +65,13 @@ class Game:
         if self.score % 100 == 0:
             self.game_speed += 5
 
+
     def draw(self):
         self.clock.tick(FPS)
-        self.screen.fill((255, 255, 255))
+        self.screen.fill((255,255,255))
+        self.screen.blit(BG_FUNDO_DIA, (0,0))
         self.draw_background()
+        self.draw_bg_image()
         self.player.draw(self.screen)
         self.obstacle_manager.draw(self.screen)
         self.draw_score()
@@ -81,6 +88,12 @@ class Game:
             self.screen.blit(BG, (image_width + self.x_pos_bg, self.y_pos_bg))
             self.x_pos_bg = 0
         self.x_pos_bg -= self.game_speed
+
+    def draw_bg_image(self):
+        if self.score >= 500 and self.score <= 1000:
+            self.screen.fill((0,0,0))
+            self.screen.blit(BG_FUNDO_NOITE, (0,0))
+            self.draw_background()
 
     def draw_score(self):
         draw_message_component(

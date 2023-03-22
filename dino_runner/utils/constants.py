@@ -1,6 +1,8 @@
 import pygame
 import os
 
+pygame.mixer.init()
+
 # Global Constants
 TITLE = "Chrome Dino Runner"
 SCREEN_HEIGHT = 600
@@ -10,6 +12,15 @@ IMG_DIR = os.path.join(os.path.dirname(__file__), "..", "assets")
 
 # Assets Constants
 ICON = pygame.image.load(os.path.join(IMG_DIR, "DinoWallpaper.png"))
+
+JUMP_SOUND = pygame.mixer.Sound(os.path.join(IMG_DIR, "Other/sons_jump_sound.wav"))
+JUMP_SOUND.set_volume(1)
+
+SCORE_SOUND = pygame.mixer.Sound(os.path.join(IMG_DIR, "Other/sons_score_sound.wav"))
+SCORE_SOUND.set_volume(1)
+
+DEATH_SOUND = pygame.mixer.Sound(os.path.join(IMG_DIR, "Other/sons_death_sound.wav"))
+DEATH_SOUND.set_volume(1)
 
 RUNNING = [
     pygame.image.load(os.path.join(IMG_DIR, "Dino/DinoRun1.png")),
@@ -22,8 +33,8 @@ RUNNING_SHIELD = [
 ]
 
 RUNNING_HAMMER = [
-    pygame.image.load(os.path.join(IMG_DIR, "Dino/DinoDuck1Hammer.png")),
-    pygame.image.load(os.path.join(IMG_DIR, "Dino/DinoRun2.png")),
+    pygame.image.load(os.path.join(IMG_DIR, "Dino/DinoRun1Hammer.png")),
+    pygame.image.load(os.path.join(IMG_DIR, "Dino/DinoRun2Hammer1.png")),
 ]
 
 JUMPING = pygame.image.load(os.path.join(IMG_DIR, "Dino/DinoJump.png"))
@@ -42,7 +53,7 @@ DUCKING_SHIELD = [
 
 DUCKING_HAMMER = [
     pygame.image.load(os.path.join(IMG_DIR, "Dino/DinoDuck1Hammer.png")),
-    pygame.image.load(os.path.join(IMG_DIR, "Dino/DinoDuck2.png")),
+    pygame.image.load(os.path.join(IMG_DIR, "Dino/DinoDuck2Hammer.png")),
 ]
 
 SMALL_CACTUS = [
@@ -66,6 +77,12 @@ SHIELD = pygame.image.load(os.path.join(IMG_DIR, 'Other/shield.png'))
 HAMMER = pygame.image.load(os.path.join(IMG_DIR, 'Other/hammer.png'))
 
 BG = pygame.image.load(os.path.join(IMG_DIR, 'Other/Track.png'))
+
+BG_FUNDO_NOITE = pygame.image.load(os.path.join(IMG_DIR, 'Other/cidade_fundo.jpg'))
+BG_FUNDO_NOITE = pygame.transform.scale(BG_FUNDO_NOITE, (SCREEN_WIDTH, SCREEN_HEIGHT-210))
+
+BG_FUNDO_DIA = pygame.image.load(os.path.join(IMG_DIR, 'Other/cidade_fundo_dia.jpg'))
+BG_FUNDO_DIA = pygame.transform.scale(BG_FUNDO_DIA, (SCREEN_WIDTH, SCREEN_HEIGHT-210))
 
 HEART = pygame.image.load(os.path.join(IMG_DIR, 'Other/SmallHeart.png'))
 

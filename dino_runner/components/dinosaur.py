@@ -1,9 +1,9 @@
 import pygame 
 from pygame.sprite import Sprite
-from dino_runner.utils.constants import RUNNING, JUMPING, DUCKING, DEFAULT_TYPE, SHIELD_TYPE, DUCKING_SHIELD, JUMPING_SHIELD, RUNNING_SHIELD
-DUCK_IMG = { DEFAULT_TYPE: DUCKING, SHIELD_TYPE: DUCKING_SHIELD}
-JUMP_IMG = { DEFAULT_TYPE: JUMPING, SHIELD_TYPE: JUMPING_SHIELD}
-RUN_IMG = { DEFAULT_TYPE: RUNNING, SHIELD_TYPE: RUNNING_SHIELD}
+from dino_runner.utils.constants import RUNNING, JUMPING, DUCKING, DEFAULT_TYPE, SHIELD_TYPE, DUCKING_SHIELD, JUMPING_SHIELD, RUNNING_SHIELD, RUNNING_HAMMER, JUMPING_HAMMER, DUCKING_HAMMER, JUMP_SOUND
+DUCK_IMG = { DEFAULT_TYPE: DUCKING_HAMMER, SHIELD_TYPE: DUCKING_SHIELD}
+JUMP_IMG = { DEFAULT_TYPE: JUMPING_HAMMER, SHIELD_TYPE: JUMPING_SHIELD}
+RUN_IMG = { DEFAULT_TYPE: RUNNING_HAMMER, SHIELD_TYPE: RUNNING_SHIELD}
 X_POS = 80
 Y_POS = 310
 Y_POS_DUCK = 340
@@ -36,7 +36,8 @@ class Dinosaur(Sprite):
             self.jump()
         elif self.dino_duck:
             self.duck()
-        if user_input[pygame.K_UP] or user_input[pygame.K_SPACE] and not self.dino_jump:
+        if user_input[pygame.K_UP] and not self.dino_jump or user_input[pygame.K_SPACE] and not self.dino_jump:
+            JUMP_SOUND.play()
             self.dino_run = False
             self.dino_jump = True
             self.dino_duck = False
