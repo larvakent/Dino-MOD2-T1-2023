@@ -84,6 +84,8 @@ BG_FUNDO_NOITE = pygame.transform.scale(BG_FUNDO_NOITE, (SCREEN_WIDTH, SCREEN_HE
 BG_FUNDO_DIA = pygame.image.load(os.path.join(IMG_DIR, 'Other/cidade_fundo_dia.jpg'))
 BG_FUNDO_DIA = pygame.transform.scale(BG_FUNDO_DIA, (SCREEN_WIDTH, SCREEN_HEIGHT))
 
+GAME_OVER = pygame.image.load(os.path.join(IMG_DIR, ("Other/GameOver.png")))
+
 HEART = pygame.image.load(os.path.join(IMG_DIR, 'Other/SmallHeart.png'))
 
 DEFAULT_TYPE = "default"

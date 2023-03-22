@@ -1,6 +1,6 @@
 import pygame 
 
-from dino_runner.utils.constants import BG, ICON, SCREEN_HEIGHT, SCREEN_WIDTH, TITLE, FPS, DEFAULT_TYPE, SCORE_SOUND, BG_FUNDO_NOITE, BG_FUNDO_DIA
+from dino_runner.utils.constants import BG, ICON, SCREEN_HEIGHT, SCREEN_WIDTH, TITLE, FPS, DEFAULT_TYPE, SCORE_SOUND, BG_FUNDO_NOITE, BG_FUNDO_DIA, GAME_OVER
 from dino_runner.components.dinosaur import Dinosaur 
 from dino_runner.components.obstacles.obstacle_manager import ObstacleManager 
 from dino_runner.utils.text_utils import draw_message_component 
@@ -136,13 +136,15 @@ class Game:
                 self.run()
 
     def show_menu(self):
-        self.screen.fill((255, 255, 255))
+        self.screen.blit(BG_FUNDO_DIA, (0,0))
         half_screen_height = SCREEN_HEIGHT // 2
         half_screen_width = SCREEN_WIDTH // 2
 
         if self.death_count == 0:
             draw_message_component("Press any key to start", self.screen)
         else:
+            self.screen.blit(BG_FUNDO_NOITE, (0,0))
+            self.screen.blit(GAME_OVER, (half_screen_width-190, half_screen_height-200))
             draw_message_component("Press any key to restart", self.screen, pos_y_center=half_screen_height + 140)
             draw_message_component(
                 f"Your score: {self.score}", self.screen,
