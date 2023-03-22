@@ -88,7 +88,7 @@ class Game:
         self.x_pos_bg -= 2
 
         if self.score % 500 == 0:
-            self.time_to_blit = pygame.time.get_ticks() + 10000
+            self.time_to_blit = pygame.time.get_ticks() + 5000
         if self.time_to_blit:
             self.background = BG_FUNDO_NOITE
             image_width = self.background.get_width()
@@ -100,6 +100,8 @@ class Game:
             self.x_pos_bg -= 2
             if pygame.time.get_ticks() >= self.time_to_blit:
                 self.time_to_blit = None
+                self.background = BG_FUNDO_DIA
+        
 
     def draw_score(self):
         draw_message_component(
