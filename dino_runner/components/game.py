@@ -21,8 +21,7 @@ class Game:
         self.game_speed = 20
         self.x_pos_bg = 0
         self.y_pos_bg = 0
-        self.x_pos_bg_image = SCREEN_WIDTH
-        self.y_pos_bg_image = SCREEN_HEIGHT - 210
+        self.background = BG_FUNDO_DIA
         self.player = Dinosaur()
         self.obstacle_manager = ObstacleManager()
         self.power_up_manager = PowerUpManager()
@@ -71,7 +70,6 @@ class Game:
         self.clock.tick(FPS)
         self.screen.fill((255,255,255))
         self.draw_background()
-        self.draw_bg_image()
         self.player.draw(self.screen)
         self.obstacle_manager.draw(self.screen)
         self.draw_score()
@@ -80,25 +78,24 @@ class Game:
         pygame.display.update()
         pygame.display.flip()
     
-
     def draw_background(self):
-        image_width = BG_FUNDO_DIA.get_width()
-        self.screen.blit(BG_FUNDO_DIA, (self.x_pos_bg, self.y_pos_bg))
-        self.screen.blit(BG_FUNDO_DIA, (image_width + self.x_pos_bg, self.y_pos_bg)) 
+        image_width = self.background.get_width()
+        self.screen.blit(self.background, (self.x_pos_bg, self.y_pos_bg))
+        self.screen.blit(self.background, (image_width + self.x_pos_bg, self.y_pos_bg)) 
         if self.x_pos_bg <= -image_width:
-            self.screen.blit(BG_FUNDO_DIA, (image_width + self.x_pos_bg, self.y_pos_bg))
+            self.screen.blit(self.background, (image_width + self.x_pos_bg, self.y_pos_bg))
             self.x_pos_bg = 0
         self.x_pos_bg -= 2
 
-    def draw_bg_image(self):
         if self.score % 500 == 0:
-            self.time_to_blit = pygame.time.get_ticks() + 5000
+            self.time_to_blit = pygame.time.get_ticks() + 10000
         if self.time_to_blit:
-            image_width = BG_FUNDO_NOITE.get_width()
-            self.screen.blit(BG_FUNDO_NOITE, (self.x_pos_bg, self.y_pos_bg))
-            self.screen.blit(BG_FUNDO_NOITE, (image_width + self.x_pos_bg, self.y_pos_bg)) 
+            self.background = BG_FUNDO_NOITE
+            image_width = self.background.get_width()
+            self.screen.blit(self.background, (self.x_pos_bg, self.y_pos_bg))
+            self.screen.blit(self.background, (image_width + self.x_pos_bg, self.y_pos_bg)) 
             if self.x_pos_bg <= -image_width:
-                self.screen.blit(BG_FUNDO_NOITE, (image_width + self.x_pos_bg, self.y_pos_bg))
+                self.screen.blit(self.background, (image_width + self.x_pos_bg, self.y_pos_bg))
                 self.x_pos_bg = 0
             self.x_pos_bg -= 2
             if pygame.time.get_ticks() >= self.time_to_blit:
@@ -136,14 +133,13 @@ class Game:
                 self.run()
 
     def show_menu(self):
-        self.screen.blit(BG_FUNDO_DIA, (0,0))
+        self.screen.blit(self.background, (0,0))
         half_screen_height = SCREEN_HEIGHT // 2
         half_screen_width = SCREEN_WIDTH // 2
 
         if self.death_count == 0:
             draw_message_component("Press any key to start", self.screen)
         else:
-            self.screen.blit(BG_FUNDO_NOITE, (0,0))
             self.screen.blit(GAME_OVER, (half_screen_width-190, half_screen_height-200))
             draw_message_component("Press any key to restart", self.screen, pos_y_center=half_screen_height + 140)
             draw_message_component(
