@@ -88,7 +88,7 @@ class Game:
         self.x_pos_bg -= 2
 
         if self.score % 500 == 0:
-            self.time_to_blit = pygame.time.get_ticks() + 5000
+            self.time_to_blit = pygame.time.get_ticks() + 7000
         if self.time_to_blit:
             self.background = BG_FUNDO_NOITE
             image_width = self.background.get_width()
